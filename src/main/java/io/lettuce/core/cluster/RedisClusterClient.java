@@ -1341,8 +1341,7 @@ public class RedisClusterClient extends AbstractRedisClient {
      */
     public void addListener(RedisConnectionStateListener listener) {
 
-        LettuceAssert.notNull(listener, "RedisConnectionStateListener must not be null");
-        connectionEvents.addListener(listener);
+        super.addListener(listener);
     }
 
     private class NodeConnectionFactoryImpl implements NodeConnectionFactory {
