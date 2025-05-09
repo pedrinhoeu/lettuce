@@ -21,7 +21,7 @@ import io.lettuce.core.protocol.ProtocolKeyword;
  * @author Mark Paluch
  * @since 5.0
  */
-class ParameterBinder {
+class RedisParameterBinder {
 
     private static final byte[] MINUS_BYTES = { '-' };
 

@@ -29,7 +29,7 @@ class CommandSegmentCommandFactory implements CommandFactory {
 
     private final RedisCodec<Object, Object> redisCodec;
 
-    private final ParameterBinder parameterBinder = new ParameterBinder();
+    private final RedisParameterBinder redisParameterBinder = new RedisParameterBinder();
 
     private final CommandOutputFactory outputFactory;
 
@@ -84,7 +84,7 @@ class CommandSegmentCommandFactory implements CommandFactory {
         CommandOutput<Object, Object, ?> output = outputFactory.create(redisCodec);
         Command<Object, Object, ?> command = new Command<>(this.segments.getCommandType(), output, args);
 
-        parameterBinder.bind(args, redisCodec, segments, parametersAccessor);
+        redisParameterBinder.bind(args, redisCodec, segments, parametersAccessor);
 
         return (Command) command;
     }

@@ -25,9 +25,9 @@ import io.lettuce.core.protocol.CommandType;
  */
 @Tag(UNIT_TEST)
 @ExtendWith(MockitoExtension.class)
-class ParameterBinderUnitTests {
+class RedisParameterBinderUnitTests {
 
-    private ParameterBinder binder = new ParameterBinder();
+    private RedisParameterBinder binder = new RedisParameterBinder();
 
     private CommandSegments segments = new CommandSegments(Collections.singletonList(CommandSegment.constant("set")));
 
