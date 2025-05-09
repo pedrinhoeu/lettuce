@@ -6,8 +6,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import io.lettuce.core.dynamic.support.*;
-import io.lettuce.core.internal.LettuceAssert;
-import io.lettuce.core.internal.LettuceClassUtils;
 
 /**
  * Abstracts a method parameter and exposes access to type and parameter information.
@@ -17,7 +15,7 @@ import io.lettuce.core.internal.LettuceClassUtils;
  */
 public class Parameter {
 
-    private final ParameterNameDiscoverer discoverer = new CompositeParameterNameDiscoverer(
+    public final ParameterNameDiscoverer discoverer = new CompositeParameterNameDiscoverer(
             new StandardReflectionParameterNameDiscoverer(), new AnnotationParameterNameDiscoverer());
 
     private final Method method;
@@ -109,19 +107,6 @@ public class Parameter {
      */
     public TypeInformation<?> getTypeInformation() {
         return typeInformation;
-    }
-
-    /**
-     * Check whether the parameter is assignable to {@code target}.
-     *
-     * @param target must not be {@code null}.
-     * @return
-     */
-    public boolean isAssignableTo(Class<?> target) {
-
-        LettuceAssert.notNull(target, "Target type must not be null");
-
-        return LettuceClassUtils.isAssignable(target, getParameterType());
     }
 
     /**

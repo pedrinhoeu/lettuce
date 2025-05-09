@@ -43,11 +43,11 @@ public class ExecutionSpecificParameters extends Parameters<ExecutionSpecificPar
             Parameter methodParameter = parameters.get(i);
 
             if (methodParameter.isSpecialParameter()) {
-                if (methodParameter.isAssignableTo(Timeout.class)) {
+                if (methodParameter.discoverer.isAssignableTo(Timeout.class, methodParameter)) {
                     timeoutIndex = i;
                 }
 
-                if (methodParameter.isAssignableTo(CommandBatching.class)) {
+                if (methodParameter.discoverer.isAssignableTo(CommandBatching.class, methodParameter)) {
                     commandBatchingIndex = i;
                 }
             }

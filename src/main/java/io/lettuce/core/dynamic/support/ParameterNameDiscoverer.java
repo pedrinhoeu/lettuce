@@ -1,5 +1,9 @@
 package io.lettuce.core.dynamic.support;
 
+import io.lettuce.core.dynamic.parameter.Parameter;
+import io.lettuce.core.internal.LettuceAssert;
+import io.lettuce.core.internal.LettuceClassUtils;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
@@ -28,4 +32,17 @@ public interface ParameterNameDiscoverer {
      */
     String[] getParameterNames(Constructor<?> ctor);
 
+    /**
+     * Check whether the parameter is assignable to {@code target}.
+     *
+     * @param target    must not be {@code null}.
+     * @param parameter
+     * @return
+     */
+    default boolean isAssignableTo(Class<?> target, Parameter parameter) {
+
+        LettuceAssert.notNull(target, "Target type must not be null");
+
+        return LettuceClassUtils.isAssignable(target, parameter.getParameterType());
+    }
 }

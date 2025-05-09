@@ -81,9 +81,9 @@ class DefaultMethodParametersAccessor implements MethodParametersAccessor {
 
         Parameter bindableParameter = parameters.getBindableParameter(index);
 
-        if (bindableParameter.isAssignableTo(Limit.class) || bindableParameter.isAssignableTo(io.lettuce.core.Value.class)
-                || bindableParameter.isAssignableTo(KeyValue.class) || bindableParameter.isAssignableTo(ScoredValue.class)
-                || bindableParameter.isAssignableTo(GeoCoordinates.class) || bindableParameter.isAssignableTo(Range.class)) {
+        if (bindableParameter.discoverer.isAssignableTo(Limit.class, bindableParameter) || bindableParameter.discoverer.isAssignableTo(io.lettuce.core.Value.class, bindableParameter)
+                || bindableParameter.discoverer.isAssignableTo(KeyValue.class, bindableParameter) || bindableParameter.discoverer.isAssignableTo(ScoredValue.class, bindableParameter)
+                || bindableParameter.discoverer.isAssignableTo(GeoCoordinates.class, bindableParameter) || bindableParameter.discoverer.isAssignableTo(Range.class, bindableParameter)) {
             return false;
         }
 

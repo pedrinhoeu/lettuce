@@ -115,15 +115,15 @@ class DefaultCommandMethodVerifier implements CommandMethodVerifier {
                 continue;
             }
 
-            if (bindableParameter.isAssignableTo(KeyValue.class) || bindableParameter.isAssignableTo(ScoredValue.class)) {
+            if (bindableParameter.discoverer.isAssignableTo(KeyValue.class, bindableParameter) || bindableParameter.discoverer.isAssignableTo(ScoredValue.class, bindableParameter)) {
                 count++;
             }
 
-            if (bindableParameter.isAssignableTo(GeoCoordinates.class) || bindableParameter.isAssignableTo(Range.class)) {
+            if (bindableParameter.discoverer.isAssignableTo(GeoCoordinates.class, bindableParameter) || bindableParameter.discoverer.isAssignableTo(Range.class, bindableParameter)) {
                 count++;
             }
 
-            if (bindableParameter.isAssignableTo(Limit.class)) {
+            if (bindableParameter.discoverer.isAssignableTo(Limit.class, bindableParameter)) {
                 count += 2;
             }
 
