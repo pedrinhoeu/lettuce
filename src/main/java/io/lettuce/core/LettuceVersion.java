@@ -10,26 +10,9 @@ package io.lettuce.core;
  * @author Mark Paluch
  * @since 6.3
  */
-public final class LettuceVersion {
+public final class LettuceVersion extends ILettuceVersion {
 
     private LettuceVersion() {
-    }
-
-    /**
-     * Return the library name.
-     */
-    public static String getName() {
-        return "Lettuce";
-    }
-
-    /**
-     * Return the full version string of the present Lettuce codebase, or {@code null} if it cannot be determined.
-     *
-     * @see Package#getImplementationVersion()
-     */
-    public static String getVersion() {
-        Package pkg = LettuceVersion.class.getPackage();
-        return (pkg != null ? pkg.getImplementationVersion() : null);
     }
 
 }
