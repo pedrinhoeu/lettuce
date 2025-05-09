@@ -17,7 +17,7 @@ import io.lettuce.core.internal.LettuceAssert;
  * @see MethodInvocation
  * @see InvocationTargetProvider
  */
-public class DefaultMethodInvokingInterceptor implements MethodInterceptor {
+public class DefaultMethodInvoker implements MethodInterceptor {
 
     private final Map<Method, MethodHandle> methodHandleCache = new ConcurrentHashMap<>();
 
@@ -35,7 +35,7 @@ public class DefaultMethodInvokingInterceptor implements MethodInterceptor {
 
         InvocationTargetProvider targetProvider = (InvocationTargetProvider) invocation;
 
-        return methodHandleCache.computeIfAbsent(method, DefaultMethodInvokingInterceptor::lookupMethodHandle)
+        return methodHandleCache.computeIfAbsent(method, DefaultMethodInvoker::lookupMethodHandle)
                 .bindTo(targetProvider.getInvocationTarget()).invokeWithArguments(invocation.getArguments());
     }
 
