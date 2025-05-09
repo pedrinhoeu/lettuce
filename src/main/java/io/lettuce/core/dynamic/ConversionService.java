@@ -13,7 +13,7 @@ import io.lettuce.core.internal.LettuceAssert;
 /**
  * @author Mark Paluch
  */
-class ConversionService {
+class ConversionService implements IConversionService {
 
     private Map<ConvertiblePair, Function<?, ?>> converterMap = new HashMap<>(10);
 
@@ -23,6 +23,7 @@ class ConversionService {
      * @param converter the converter.
      */
     @SuppressWarnings("rawtypes")
+    @Override
     public void addConverter(Function<?, ?> converter) {
 
         LettuceAssert.notNull(converter, "Converter must not be null");
@@ -36,6 +37,7 @@ class ConversionService {
     }
 
     @SuppressWarnings("unchecked")
+    @Override
     public <S, T> T convert(S source, Class<T> targetType) {
 
         LettuceAssert.notNull(source, "Source must not be null");
@@ -43,6 +45,7 @@ class ConversionService {
         return (T) getConverter(source.getClass(), targetType).apply(source);
     }
 
+    @Override
     public <S, T> boolean canConvert(Class<S> sourceType, Class<T> targetType) {
         return findConverter(sourceType, targetType).isPresent();
     }
