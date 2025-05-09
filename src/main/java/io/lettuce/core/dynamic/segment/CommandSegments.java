@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import io.lettuce.core.dynamic.parameter.Parameter;
 import io.lettuce.core.internal.LettuceAssert;
 import io.lettuce.core.protocol.CommandType;
 import io.lettuce.core.protocol.ProtocolKeyword;
@@ -62,6 +63,17 @@ public class CommandSegments implements Iterable<CommandSegment> {
 
     public int size() {
         return segments.size();
+    }
+
+    public boolean isConsumed(Parameter bindableParameter) {
+
+        for (CommandSegment commandSegment : this) {
+            if (commandSegment.canConsume(bindableParameter)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     static class StringCommandType implements ProtocolKeyword {

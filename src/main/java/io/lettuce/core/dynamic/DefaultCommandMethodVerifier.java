@@ -11,7 +11,6 @@ import io.lettuce.core.Limit;
 import io.lettuce.core.Range;
 import io.lettuce.core.ScoredValue;
 import io.lettuce.core.dynamic.parameter.Parameter;
-import io.lettuce.core.dynamic.segment.CommandSegment;
 import io.lettuce.core.dynamic.segment.CommandSegments;
 import io.lettuce.core.internal.LettuceAssert;
 import io.lettuce.core.internal.LettuceLists;
@@ -110,7 +109,7 @@ class DefaultCommandMethodVerifier implements CommandMethodVerifier {
 
             Parameter bindableParameter = bindableParameters.get(i);
 
-            boolean consumed = isConsumed(commandSegments, bindableParameter);
+            boolean consumed = commandSegments.isConsumed(bindableParameter);
 
             if (consumed) {
                 continue;
@@ -132,17 +131,6 @@ class DefaultCommandMethodVerifier implements CommandMethodVerifier {
         }
 
         return count;
-    }
-
-    private boolean isConsumed(CommandSegments commandSegments, Parameter bindableParameter) {
-
-        for (CommandSegment commandSegment : commandSegments) {
-            if (commandSegment.canConsume(bindableParameter)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private CommandMethodSyntaxException syntaxException(String commandName, CommandMethod commandMethod) {
