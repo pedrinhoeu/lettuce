@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import io.lettuce.core.dynamic.support.ClassTypeInformation;
-import io.lettuce.core.dynamic.support.ResolvableType;
 import io.lettuce.core.internal.LettuceAssert;
 import io.lettuce.core.output.CommandOutput;
 
@@ -88,20 +87,4 @@ public class OutputRegistryCommandOutputFactoryResolver extends CommandOutputRes
         }).collect(Collectors.toList());
     }
 
-    /**
-     * Overridable hook to check whether {@code selector} can be assigned from the provider type {@code provider}.
-     * <p>
-     * This method descends the component type hierarchy and considers primitive/wrapper type conversion.
-     *
-     * @param selector must not be {@code null}.
-     * @param provider must not be {@code null}.
-     * @return {@code true} if selector can be assigned from its provider type.
-     */
-    protected boolean isAssignableFrom(OutputSelector selector, OutputType provider) {
-
-        ResolvableType selectorType = selector.getOutputType();
-        ResolvableType resolvableType = provider.withCodec(selector.getRedisCodec());
-
-        return selectorType.isAssignableFrom(resolvableType);
-    }
 }
