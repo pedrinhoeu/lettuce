@@ -213,20 +213,6 @@ public abstract class AbstractRedisClient implements AutoCloseable {
     }
 
     /**
-     * Add a listener for the RedisConnectionState. The listener is notified every time a connect/disconnect/IO exception
-     * happens. The listeners are not bound to a specific connection, so every time a connection event happens on any
-     * connection, the listener will be notified. The corresponding netty channel handler (async connection) is passed on the
-     * event.
-     *
-     * @param listener must not be {@code null}.
-     */
-    public void addListener(RedisConnectionStateListener listener) {
-
-        LettuceAssert.notNull(listener, "RedisConnectionStateListener must not be null");
-        connectionEvents.addListener(listener);
-    }
-
-    /**
      * Removes a listener.
      *
      * @param listener must not be {@code null}.
