@@ -66,12 +66,12 @@ public class ByteArrayCodec implements RedisCodec<byte[], byte[]>, ToByteBufEnco
 
     @Override
     public byte[] decodeKey(ByteBuffer bytes) {
-        return getBytes(bytes);
+        return readRemainingBytes(bytes);
     }
 
     @Override
     public byte[] decodeValue(ByteBuffer bytes) {
-        return getBytes(bytes);
+        return readRemainingBytes(bytes);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class ByteArrayCodec implements RedisCodec<byte[], byte[]>, ToByteBufEnco
         return encodeKey(value);
     }
 
-    private static byte[] getBytes(ByteBuffer buffer) {
+    private static byte[] readRemainingBytes(ByteBuffer buffer) {
         if (buffer == null) {
             return EMPTY;
         }
