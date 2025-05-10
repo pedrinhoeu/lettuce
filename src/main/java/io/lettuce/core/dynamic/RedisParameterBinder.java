@@ -255,7 +255,7 @@ class RedisParameterBinder {
         }
 
         args.add(minNumeric(range));
-        args.add(maxNumeric(range));
+        args.add(maxNumber(range));
     }
 
     private static String minNumeric(Range<? extends Number> range) {
@@ -274,7 +274,7 @@ class RedisParameterBinder {
         return lower.getValue().toString();
     }
 
-    private static String maxNumeric(Range<? extends Number> range) {
+    private static String maxNumber(Range<? extends Number> range) {
 
         Range.Boundary<? extends Number> upper = range.getUpper();
 
