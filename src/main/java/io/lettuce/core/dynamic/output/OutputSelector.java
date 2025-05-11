@@ -13,7 +13,7 @@ import io.lettuce.core.internal.LettuceAssert;
  * @author Mark Paluch
  * @since 5.0
  */
-public class OutputSelector {
+public class OutputSelector implements IOutputSelector {
 
     private final ResolvableType outputType;
 
@@ -37,6 +37,7 @@ public class OutputSelector {
     /**
      * @return the output type.
      */
+    @Override
     public ResolvableType getOutputType() {
         return outputType;
     }
@@ -45,6 +46,7 @@ public class OutputSelector {
      *
      * @return the associated codec.
      */
+    @Override
     public RedisCodec<?, ?> getRedisCodec() {
         return redisCodec;
     }
