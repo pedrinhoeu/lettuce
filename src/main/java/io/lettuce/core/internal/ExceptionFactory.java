@@ -86,7 +86,7 @@ public abstract class ExceptionFactory {
             return MINUTES.format(time);
         }
 
-        if (isExactSeconds(duration)) {
+        if (duration.toMillis() % (1000) == 0 && duration.getNano() == 0) {
             return SECONDS.format(time);
         }
 
@@ -99,10 +99,6 @@ public abstract class ExceptionFactory {
 
     private static boolean isExactMinutes(Duration duration) {
         return duration.toMillis() % (1000 * 60) == 0 && duration.getNano() == 0;
-    }
-
-    private static boolean isExactSeconds(Duration duration) {
-        return duration.toMillis() % (1000) == 0 && duration.getNano() == 0;
     }
 
     private static boolean isExactMillis(Duration duration) {
