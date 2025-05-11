@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import io.lettuce.core.internal.DefaultMethods;
 import io.lettuce.core.internal.LettuceAssert;
 
 /**
@@ -35,16 +34,8 @@ public class DefaultMethodInvoker implements MethodInterceptor {
 
         InvocationTargetProvider targetProvider = (InvocationTargetProvider) invocation;
 
-        return methodHandleCache.computeIfAbsent(method, DefaultMethodInvoker::lookupMethodHandle)
+        return methodHandleCache.computeIfAbsent(method, MethodInterceptor::lookupMethodHandle)
                 .bindTo(targetProvider.getInvocationTarget()).invokeWithArguments(invocation.getArguments());
-    }
-
-    private static MethodHandle lookupMethodHandle(Method method) {
-        try {
-            return DefaultMethods.lookupMethodHandle(method);
-        } catch (ReflectiveOperationException e) {
-            throw new IllegalArgumentException(e);
-        }
     }
 
 }
