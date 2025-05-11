@@ -107,24 +107,6 @@ public class AnnotationCommandSegmentFactory implements CommandSegmentFactory {
         return parts;
     }
 
-    private LetterCase getLetterCase(CommandMethod commandMethod) {
-
-        if (commandMethod.hasAnnotation(CommandNaming.class)) {
-            LetterCase letterCase = commandMethod.getMethod().getAnnotation(CommandNaming.class).letterCase();
-            if (letterCase != LetterCase.DEFAULT) {
-                return letterCase;
-            }
-        }
-
-        Class<?> declaringClass = commandMethod.getMethod().getDeclaringClass();
-        CommandNaming annotation = declaringClass.getAnnotation(CommandNaming.class);
-        if (annotation != null && annotation.letterCase() != LetterCase.DEFAULT) {
-            return annotation.letterCase();
-        }
-
-        return LetterCase.UPPERCASE;
-    }
-
     private Strategy getNamingStrategy(CommandMethod commandMethod) {
 
         if (commandMethod.hasAnnotation(CommandNaming.class)) {
