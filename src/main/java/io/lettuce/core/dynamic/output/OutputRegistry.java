@@ -1,6 +1,5 @@
 package io.lettuce.core.dynamic.output;
 
-import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,8 +21,6 @@ import io.lettuce.core.output.*;
  */
 @SuppressWarnings("rawtypes")
 public class OutputRegistry implements OutputRegistryAbstract {
-
-    private static final Map<OutputType, CommandOutputFactory> BUILTIN = new LinkedHashMap<>();
 
     private final Map<OutputType, CommandOutputFactory> registry = new LinkedHashMap<>();
 
@@ -58,7 +55,7 @@ public class OutputRegistry implements OutputRegistryAbstract {
 
         register(registry, StringMatchResultOutput.class, StringMatchResultOutput::new);
 
-        BUILTIN.putAll(registry);
+        OutputRegistryAbstract.BUILTIN.putAll(registry);
     }
 
     /**
@@ -76,7 +73,7 @@ public class OutputRegistry implements OutputRegistryAbstract {
     public OutputRegistry(boolean registerBuiltin) {
 
         if (registerBuiltin) {
-            registry.putAll(BUILTIN);
+            registry.putAll(OutputRegistryAbstract.BUILTIN);
         }
     }
 

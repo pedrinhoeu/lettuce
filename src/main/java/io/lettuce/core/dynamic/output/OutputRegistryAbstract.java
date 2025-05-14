@@ -6,9 +6,13 @@ import io.lettuce.core.dynamic.support.TypeInformation;
 import io.lettuce.core.output.CommandOutput;
 
 import java.lang.reflect.TypeVariable;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface OutputRegistryAbstract {
+    Map<OutputType, CommandOutputFactory> BUILTIN = new LinkedHashMap<>();
+
     <T extends CommandOutput<?, ?, ?>> void register(Class<T> commandOutputClass,
                                                      CommandOutputFactory commandOutputFactory);
 
